@@ -18,13 +18,9 @@ ANSWERS_REGEX = r"([a-eA-E][ \d]+){4}"
 
 OUTPUT_FILEPATH = '/tmp/output.txt'
 
-ERRORS = dict(
-    sliced_image='Could not slice image',
-    
-)
-
 def run_extract():
     """ Main workflow of the extract """
+
     extract = {}
     for year in YEAR_RANGE:
         print(f'Beginning extract for Year: {year}')
@@ -62,7 +58,8 @@ def run_extract():
 
 
 def slice_image(image_as_string):
-    """ Find the answers in the image_as_string and return the quesstion and answers"""
+    """ Find the answers in the image_as_string and return the quesstion and answers """
+
     match_objects = [match for match in re.finditer(ANSWERS_REGEX, image_as_string)]
     if not match_objects or len(match_objects) > 1:
         return '', '', ''
@@ -73,7 +70,7 @@ def slice_image(image_as_string):
     return question, answers, solution
 
 def clean_string(s):
-    """ Remove newline and multiple whitespaces"""
+    """ Remove newline and multiple whitespaces """
     return s.replace('\n', '').replace('  ', ' ')
 
 def write_outputfile(extract):
