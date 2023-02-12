@@ -11,10 +11,6 @@ class ErrorHandler(object):
         self.question_number = question_number
 
         self.handle_error()
-        print(f'... FAILURE: {self._type()}')
-        
-    def _type(self):
-        return self.__class__.__name__
     
     def handle_error(self):
         """
@@ -22,6 +18,8 @@ class ErrorHandler(object):
         """
         with open(self.ERROR_FILEPATH, 'a') as f:
             f.write(f"{self.year}/{self.question_number}: {self.error_cause}\n")
+        
+        print(f'... FAILURE: {self.error_name}')
 
 class ResponseFailureErrorHandler(ErrorHandler):
     """
@@ -30,6 +28,11 @@ class ResponseFailureErrorHandler(ErrorHandler):
 
     def __init__(self, year, question_number, image_as_string):
         super(ResponseFailureErrorHandler, self).__init__(year, question_number, image_as_string)
+    
+    @property
+    def error_name(self):
+        return 'HTTP response error'
+
 
 class CannotSliceImageErrorHandler(ErrorHandler):
     """
@@ -38,6 +41,10 @@ class CannotSliceImageErrorHandler(ErrorHandler):
 
     def __init__(self, year, question_number, image_as_string):
         super(CannotSliceImageErrorHandler, self).__init__(year, question_number, image_as_string)
+    
+    @property
+    def error_name(self):
+        return 'Could not slice image text'
 
 
 class HandleError(object):
