@@ -38,16 +38,15 @@ def run_extract():
             question_dict['image_as_string'] = image_as_string
 
             question_as_string, answers_as_string, solution_as_string = slice_image(image_as_string)
-            if question_as_string and answers_as_string and solution_as_string:
-                question = clean_string(question_as_string)
-                answers =  clean_string(answers_as_string)
-                solution = clean_string(solution_as_string)
-            else:
+            if not question_as_string or not answers_as_string or not solution_as_string:
                 HandleError.CANNOT_SLICED_IMAGE(year, question_number, image_as_string)
                 continue
             
-            if question and answers and solution:
-                question_dict.update(dict(question=question, answers=answers, solution=solution))
+            question = clean_string(question_as_string)
+            answers =  clean_string(answers_as_string)
+            solution = clean_string(solution_as_string)
+
+            question_dict.update(dict(question=question, answers=answers, solution=solution))
             
             extract[year][question_number] = question_dict
 

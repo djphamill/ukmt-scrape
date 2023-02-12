@@ -49,7 +49,7 @@ class CannotSliceImageErrorHandler(ErrorHandler):
 
 class HandleError(object):
     """
-    A class to handle different types of errors arrising from the extract
+    A class to point to the correc error handler for different error types arrising from the extract
     """
     RESPONSE_FAILURE = ResponseFailureErrorHandler
     CANNOT_SLICED_IMAGE = CannotSliceImageErrorHandler
