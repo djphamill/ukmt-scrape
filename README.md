@@ -1,4 +1,4 @@
-# Script to scrape KMT questions
+# Script to scrape UKMT questions
 
 A number of websites, including UKMT's, hold images of the UKMT's questions.
 
